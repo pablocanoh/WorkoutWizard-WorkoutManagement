@@ -27,6 +27,9 @@ repositories {
 dependencies {
     implementation("edu.uoc:routine-client:${project.version}")
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(path: ':workout-client')
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation "org.projectlombok:lombok:${lombok}"
     annotationProcessor "org.projectlombok:lombok:${lombok}"

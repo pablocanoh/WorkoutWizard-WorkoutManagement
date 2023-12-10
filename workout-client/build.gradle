@@ -16,6 +16,9 @@ repositories {
 }
 
 dependencies {
+    implementation "org.projectlombok:lombok:${lombok}"
+    implementation 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor "org.projectlombok:lombok:${lombok}"
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
