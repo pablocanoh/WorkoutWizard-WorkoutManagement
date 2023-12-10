@@ -11,6 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AddWorkoutRequest {
 
-    private final UUID routineId;
+    private final UUID diaryId;
     private final Workout workout;
 }

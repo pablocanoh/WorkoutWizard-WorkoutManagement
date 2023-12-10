@@ -22,7 +22,7 @@ public class WorkoutDiary {
     @Column
     private UUID routineId;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "workout_diary_id")
     public List<Workout> workouts;
 

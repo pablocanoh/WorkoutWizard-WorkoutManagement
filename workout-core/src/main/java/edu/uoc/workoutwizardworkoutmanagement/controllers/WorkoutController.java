@@ -1,7 +1,6 @@
 package edu.uoc.workoutwizardworkoutmanagement.controllers;
 
 import com.example.workoutclient.dto.AddWorkoutRequest;
-import com.example.workoutclient.dto.Workout;
 import edu.uoc.workoutwizardworkoutmanagement.domain.WorkoutDiary;
 import edu.uoc.workoutwizardworkoutmanagement.mappers.WorkoutMappers;
 import edu.uoc.workoutwizardworkoutmanagement.service.WorkoutService;
@@ -25,6 +24,6 @@ public class WorkoutController {
 
     @PostMapping
     public UUID addWorkout(@RequestBody AddWorkoutRequest request) {
-        return workoutService.addWorkout(WorkoutMappers.transform(request.getWorkout()), request.getRoutineId());
+        return workoutService.addWorkout(WorkoutMappers.transform(request.getWorkout()), request.getDiaryId());
     }
 }
