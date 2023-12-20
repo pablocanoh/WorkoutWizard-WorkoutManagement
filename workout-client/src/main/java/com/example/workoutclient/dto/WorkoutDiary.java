@@ -16,5 +16,5 @@ public class WorkoutDiary {
 
     private UUID id;
     private UUID routineId;
-    public List<Workout> workouts;
+    public List<AddWorkoutRequest> workouts;
 }

@@ -4,8 +4,6 @@ import com.example.routineclient.RoutineClient;
 import com.example.routineclient.dtos.Routine;
 import com.example.routineclient.dtos.RoutineDay;
 import com.example.workoutclient.dto.AddWorkoutRequest;
-import com.example.workoutclient.dto.Workout;
-import com.example.workoutclient.dto.WorkoutExercise;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.uoc.workoutwizardworkoutmanagement.repositories.WorkoutRepository;
 import org.junit.jupiter.api.Test;
@@ -29,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class WorkoutControllerIntegrationTest {
+public class AddWorkoutRequestControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -55,7 +53,7 @@ public class WorkoutControllerIntegrationTest {
                 )));
         var diaryId = initDiary();
 
-        var workout = Workout.builder()
+        var workout = AddWorkoutRequest.builder()
                 .exercises(List.of(WorkoutExercise.builder()
                         .weights(Map.of(1, 11.0, 2, 11.0))
                         .build()))
@@ -94,7 +92,7 @@ public class WorkoutControllerIntegrationTest {
         verifyWorkoutAdded(diaryId, 8, 1);
     }
 
-    private void addWorkout(Workout workout, UUID diaryId) throws Exception {
+    private void addWorkout(AddWorkoutRequest workout, UUID diaryId) throws Exception {
         mockMvc.perform(post("/workout")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(AddWorkoutRequest.builder()

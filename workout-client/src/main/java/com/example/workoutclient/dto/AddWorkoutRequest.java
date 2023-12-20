@@ -3,14 +3,17 @@ package com.example.workoutclient.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.util.Map;
 import java.util.UUID;
 
-@Builder
 @Getter
+@Builder(toBuilder = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class AddWorkoutRequest {
 
-    private final UUID diaryId;
-    private final Workout workout;
+    private Integer workoutDayNumber;
+    private Map<UUID, Map<Integer, Double>> exercises;
 }

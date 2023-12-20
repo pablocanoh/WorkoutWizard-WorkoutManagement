@@ -23,7 +23,7 @@ public class WorkoutController {
     }
 
     @PostMapping
-    public UUID addWorkout(@RequestBody AddWorkoutRequest request) {
-        return workoutService.addWorkout(WorkoutMappers.transform(request.getWorkout()), request.getDiaryId());
+    public UUID addWorkout(@RequestBody AddWorkoutRequest workout) {
+        return workoutService.addWorkout(WorkoutMappers.transform(workout));
     }
 }

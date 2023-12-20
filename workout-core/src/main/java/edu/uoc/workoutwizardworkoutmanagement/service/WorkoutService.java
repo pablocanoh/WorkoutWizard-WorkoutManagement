@@ -18,12 +18,12 @@ public class WorkoutService {
     @Autowired
     private WorkoutRepository workoutDiaryRepository;
 
-    public WorkoutDiary getWorkoutDiary(UUID id) {
-        return workoutDiaryRepository.findById(id).orElseThrow();
+    public WorkoutDiary getWorkoutDiary() {
+        return workoutDiaryRepository.findAll().stream().findFirst().orElseThrow();
     }
 
-    public UUID addWorkout(Workout workout, UUID diaryId) {
-        final var diary = getWorkoutDiary(diaryId);
+    public UUID addWorkout(Workout workout) {
+        final var diary = getWorkoutDiary();
         final var routine = routineClient.getRoutine(diary.getRoutineId());
         final var frequency = routine.getDays();
         final var dayNumber = diary.getWorkouts().size() % frequency;
