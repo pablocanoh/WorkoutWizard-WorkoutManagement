@@ -16,6 +16,8 @@ import java.util.UUID;
 public class Workout {
 
     private UUID id;
-    private Integer workoutDayNumber;private Instant workoutDate;private List<WorkoutExercise> exercises;
+    private Integer workoutDayNumber;
+    private Instant workoutDate;
+    private List<WorkoutExercise> exercises;
 
 }
