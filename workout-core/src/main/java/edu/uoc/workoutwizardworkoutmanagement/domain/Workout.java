@@ -20,10 +20,10 @@ public class Workout {
     @Id
     private UUID id;
 
-    @Column
+    @Column(nullable = false)
     private Integer workoutDayNumber;
 
-    @Column
+    @Column(nullable = false)
     private Instant workoutDate;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

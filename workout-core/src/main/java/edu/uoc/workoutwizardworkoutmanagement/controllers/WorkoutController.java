@@ -23,6 +23,11 @@ public class WorkoutController {
         return workoutService.getAllWorkouts();
     }
 
+    @GetMapping("diary/active")
+    public WorkoutDiary getActiveDiary() {
+        return workoutService.getAllWorkouts();
+    }
+
     @PostMapping
     public UUID addWorkout(@RequestBody AddWorkoutRequest workout) {
         return workoutService.addWorkout(WorkoutMappers.transform(workout));

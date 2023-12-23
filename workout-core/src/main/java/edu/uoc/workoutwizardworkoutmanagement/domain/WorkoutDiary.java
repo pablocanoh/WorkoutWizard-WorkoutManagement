@@ -25,8 +25,4 @@ public class WorkoutDiary {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "workout_diary_id")
     public List<Workout> workouts;
-
-    public Workout getLastWorkout() {
-        return workouts.get(workouts.size() - 1);
-    }
 }
