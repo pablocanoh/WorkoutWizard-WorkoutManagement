@@ -18,14 +18,9 @@ public class WorkoutController {
     @Autowired
     private WorkoutService workoutService;
 
-    @GetMapping("diary/{id}")
-    public WorkoutDiary getDiary() {
-        return workoutService.getAllWorkouts();
-    }
-
     @GetMapping("diary/active")
     public WorkoutDiary getActiveDiary() {
-        return workoutService.getAllWorkouts();
+        return workoutService.getWorkoutDiary();
     }
 
     @PostMapping

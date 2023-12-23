@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface WorkoutRepository extends JpaRepository<WorkoutDiary, UUID> {
+
+        WorkoutDiary findTopByOrderByCreatedDateDesc();
 }

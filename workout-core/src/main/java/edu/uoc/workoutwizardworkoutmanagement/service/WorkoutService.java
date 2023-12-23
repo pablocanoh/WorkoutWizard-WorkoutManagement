@@ -21,7 +21,7 @@ public class WorkoutService {
     private WorkoutRepository workoutDiaryRepository;
 
     public WorkoutDiary getWorkoutDiary() {
-        return workoutDiaryRepository.findAll().stream().findFirst().orElseThrow();
+        return workoutDiaryRepository.findTopByOrderByCreatedDateDesc();
     }
 
     public UUID addWorkout(Workout workout) {
@@ -40,12 +40,12 @@ public class WorkoutService {
         return workoutDiaryRepository.save(diary).getRoutineId();
     }
 
-    public WorkoutDiary getAllWorkouts() {
-        return workoutDiaryRepository.findAll().stream().findFirst().orElseThrow();
-    }
-
     public UUID createWorkoutDiary(UUID routineId) {
-        final var newDiary = WorkoutDiary.builder().id(UUID.randomUUID()).workouts(List.of()).routineId(routineId).build();
+        final var newDiary = WorkoutDiary.builder()
+                .id(UUID.randomUUID())
+                .workouts(List.of())
+                .createdDate(Instant.now())
+                .routineId(routineId).build();
 
         return workoutDiaryRepository.save(newDiary).getRoutineId();
     }
