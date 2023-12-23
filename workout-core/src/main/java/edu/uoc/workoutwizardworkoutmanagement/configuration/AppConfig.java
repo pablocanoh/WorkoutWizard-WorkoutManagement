@@ -9,6 +9,6 @@ public class AppConfig {
 
     @Bean
     public RoutineClient routineClient() {
-        return new RoutineClient("http://localhost:8080");
+        return new RoutineClient("http://localhost:8081");
     }
 }

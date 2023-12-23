@@ -5,6 +5,7 @@ import com.example.routineclient.dtos.Routine;
 import com.example.routineclient.dtos.RoutineDay;
 import com.example.workoutclient.dto.AddWorkoutRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.uoc.workoutwizardworkoutmanagement.domain.WorkoutExercise;
 import edu.uoc.workoutwizardworkoutmanagement.repositories.WorkoutRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

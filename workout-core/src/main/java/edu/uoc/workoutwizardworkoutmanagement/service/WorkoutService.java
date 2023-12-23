@@ -7,6 +7,7 @@ import edu.uoc.workoutwizardworkoutmanagement.repositories.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -38,5 +39,11 @@ public class WorkoutService {
 
     public WorkoutDiary getAllWorkouts() {
         return workoutDiaryRepository.findAll().get(0);
+    }
+
+    public UUID createWorkoutDiary(UUID routineId) {
+        final var newDiary = WorkoutDiary.builder().id(UUID.randomUUID()).workouts(List.of()).routineId(routineId).build();
+
+        return workoutDiaryRepository.save(newDiary).getRoutineId();
     }
 }
