@@ -7,6 +7,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+      GITHUB_USERNAME: ${{ secrets.USERNAME_GITHUB }}
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -20,3 +24,5 @@ jobs:
         run: ./gradlew build
       - name: Run tests
         run: ./gradlew test
+      - name: Publish to GitHub Packages
+        run: ./gradlew publish
