@@ -22,11 +22,12 @@ public class WorkoutClient {
         this.baseUrl = baseUrl;
     }
 
-    public UUID createWorkoutDiary(UUID routineId) {
+    public UUID createWorkoutDiary(UUID routineId, String jwtToken) {
         final Request request;
         try {
             request = new Request.Builder()
                     .url(baseUrl + "/workout/diary")
+                    .addHeader("Authorization", jwtToken)
                     .method("POST", create(
                             okhttp3.MediaType.parse("application/json"),
                             objectMapper.writeValueAsString(CreateWorkoutDiary.builder()
@@ -48,9 +49,10 @@ public class WorkoutClient {
         }
     }
 
-    public WorkoutDiary getActiveDiary() {
+    public WorkoutDiary getActiveDiary(String jwtToken) {
         final var request = new Request.Builder()
                 .url(baseUrl + "/workout/diary/active")
+                .addHeader("Authorization", jwtToken)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -63,9 +65,10 @@ public class WorkoutClient {
         }
     }
 
-    public UUID addWorkout(AddWorkoutRequest workout) throws JsonProcessingException {
+    public UUID addWorkout(AddWorkoutRequest workout, String jwtToken) throws JsonProcessingException {
         final var request = new Request.Builder()
                 .url(baseUrl + "/workout")
+                .addHeader("Authorization", jwtToken)
                 .method("POST", create(
                         okhttp3.MediaType.parse("application/json"),
                         objectMapper.writeValueAsString(workout)

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import uoc.edu.commons.JwtTokenUtil;
 
 @Service
 public class WorkoutService {
@@ -20,13 +22,17 @@ public class WorkoutService {
     @Autowired
     private WorkoutRepository workoutDiaryRepository;
 
-    public WorkoutDiary getWorkoutDiary() {
-        return workoutDiaryRepository.findTopByOrderByCreatedDateDesc();
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    public Optional<WorkoutDiary> findWorkoutDiary(UUID userId) {
+        return workoutDiaryRepository.findTopByUserIdOrderByCreatedDateDesc(userId);
     }
 
-    public UUID addWorkout(Workout workout) {
-        final var diary = getWorkoutDiary();
-        final var routine = routineClient.getRoutine(diary.getRoutineId());
+    public UUID addWorkout(Workout workout, String jwtToken) {
+        final var userId = jwtTokenUtil.getUserIdFromToken(jwtToken);
+        final var diary = findWorkoutDiary(userId).orElseThrow();
+        final var routine = routineClient.getRoutine(diary.getRoutineId(), jwtToken);
         final var frequency = routine.blocks().size();
         final var dayNumber = diary.getWorkouts().size() % frequency;
         final var workoutDay = workout.toBuilder()
@@ -40,9 +46,10 @@ public class WorkoutService {
         return workoutDiaryRepository.save(diary).getRoutineId();
     }
 
-    public UUID createWorkoutDiary(UUID routineId) {
+    public UUID createWorkoutDiary(UUID routineId, UUID userId) {
         final var newDiary = WorkoutDiary.builder()
                 .id(UUID.randomUUID())
+                .userId(userId)
                 .workouts(List.of())
                 .createdDate(Instant.now())
                 .routineId(routineId).build();

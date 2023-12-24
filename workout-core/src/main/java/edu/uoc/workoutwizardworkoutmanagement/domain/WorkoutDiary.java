@@ -20,6 +20,9 @@ public class WorkoutDiary {
     @Id
     private UUID id;
 
+    @Column(nullable = false)
+    private UUID userId;
+
     @Column
     private UUID routineId;
 

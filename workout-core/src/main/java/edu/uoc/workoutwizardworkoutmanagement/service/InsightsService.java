@@ -6,6 +6,7 @@ import com.example.workoutclient.dto.Workout;
 import edu.uoc.workoutwizardworkoutmanagement.mappers.WorkoutMappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uoc.edu.commons.JwtTokenUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,13 +24,22 @@ public class InsightsService {
     @Autowired
     private RoutineClient routineClient;
 
-    public List<InsightsDataPoint> getInsights() {
-        final var diary = WorkoutMappers.transform(workoutService.getWorkoutDiary());
-        final var workouts = diary.getWorkouts().stream()
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    public List<InsightsDataPoint> getInsights(String jwtToken) {
+        final var userId = jwtTokenUtil.getUserIdFromToken(jwtToken);
+        final var diary = workoutService.findWorkoutDiary(userId);
+
+        if (diary.isEmpty()) {
+            return List.of();
+        }
+        ;
+        final var workouts = WorkoutMappers.transform(diary.get()).getWorkouts().stream()
                 .sorted(Comparator.comparing(Workout::getWorkoutDate))
                 .toList();
 
-        final var batchSize = routineClient.getRoutine(diary.getRoutineId()).getDays();
+        final var batchSize = routineClient.getRoutine(diary.get().getRoutineId(), jwtToken).blocks().size();
 
         return groupWorkouts(workouts, batchSize);
     }

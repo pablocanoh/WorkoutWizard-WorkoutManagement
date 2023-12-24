@@ -22,9 +22,10 @@ public class InsightsClient {
         this.baseUrl = baseUrl;
     }
 
-    public List<InsightsDataPoint> getInsights() {
+    public List<InsightsDataPoint> getInsights(String jwtToken) {
         final var request = new Request.Builder()
                 .url(baseUrl + "/insights")
+                .addHeader("Authorization", jwtToken)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
