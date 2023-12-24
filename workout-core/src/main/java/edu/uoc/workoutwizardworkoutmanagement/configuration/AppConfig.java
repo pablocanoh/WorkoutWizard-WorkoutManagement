@@ -1,6 +1,7 @@
 package edu.uoc.workoutwizardworkoutmanagement.configuration;
 
 import com.example.routineclient.RoutineClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import uoc.edu.commons.JwtTokenUtil;
@@ -9,8 +10,8 @@ import uoc.edu.commons.JwtTokenUtil;
 public class AppConfig {
 
     @Bean
-    public RoutineClient routineClient() {
-        return new RoutineClient("http://localhost:8081");
+    public RoutineClient routineClient(@Value("${routine-service.url}") String routineServiceUrl) {
+        return new RoutineClient(routineServiceUrl);
     }
 
     @Bean
