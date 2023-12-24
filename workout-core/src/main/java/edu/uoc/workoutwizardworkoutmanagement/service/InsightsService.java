@@ -1,16 +1,18 @@
 package edu.uoc.workoutwizardworkoutmanagement.service;
 
 import com.example.routineclient.RoutineClient;
-import edu.uoc.workoutwizardworkoutmanagement.domain.InsightsDataPoint;
-import edu.uoc.workoutwizardworkoutmanagement.domain.Workout;
+import com.example.workoutclient.dto.InsightsDataPoint;
+import com.example.workoutclient.dto.Workout;
+import edu.uoc.workoutwizardworkoutmanagement.mappers.WorkoutMappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-
-import static edu.uoc.workoutwizardworkoutmanagement.domain.InsightsDataPoint.emptyInsightsDataPoint;
 
 @Service
 public class InsightsService {
@@ -21,8 +23,8 @@ public class InsightsService {
     @Autowired
     private RoutineClient routineClient;
 
-    public List<InsightsDataPoint> getWeeklyInsights() {
-        final var diary = workoutService.getWorkoutDiary();
+    public List<InsightsDataPoint> getInsights() {
+        final var diary = WorkoutMappers.transform(workoutService.getWorkoutDiary());
         final var workouts = diary.getWorkouts().stream()
                 .sorted(Comparator.comparing(Workout::getWorkoutDate))
                 .toList();

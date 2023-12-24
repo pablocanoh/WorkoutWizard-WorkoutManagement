@@ -1,16 +1,11 @@
-package edu.uoc.workoutwizardworkoutmanagement.domain;
+package com.example.workoutclient.dto;
 
-import com.example.routineclient.dtos.Exercise;
-import com.example.routineclient.dtos.ExerciseType;
-import com.example.routineclient.dtos.ExperienceLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Builder(toBuilder = true)

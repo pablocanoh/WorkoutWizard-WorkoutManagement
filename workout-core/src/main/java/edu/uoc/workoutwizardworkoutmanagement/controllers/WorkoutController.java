@@ -2,7 +2,7 @@ package edu.uoc.workoutwizardworkoutmanagement.controllers;
 
 import com.example.workoutclient.dto.AddWorkoutRequest;
 import com.example.workoutclient.dto.CreateWorkoutDiary;
-import edu.uoc.workoutwizardworkoutmanagement.domain.WorkoutDiary;
+import com.example.workoutclient.dto.WorkoutDiary;
 import edu.uoc.workoutwizardworkoutmanagement.mappers.WorkoutMappers;
 import edu.uoc.workoutwizardworkoutmanagement.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class WorkoutController {
 
     @GetMapping("diary/active")
     public WorkoutDiary getActiveDiary() {
-        return workoutService.getWorkoutDiary();
+        return WorkoutMappers.transform(workoutService.getWorkoutDiary());
     }
 
     @PostMapping

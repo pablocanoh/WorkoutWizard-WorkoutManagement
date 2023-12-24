@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.0'
-    id 'io.spring.dependency-management' version '1.1.4'
     id 'maven-publish'
 }
 
@@ -18,12 +16,11 @@ repositories {
 
 dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:${jackson}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson}"
     implementation "com.squareup.okhttp3:okhttp:${okhttp}"
     implementation "org.projectlombok:lombok:1.18.28"
     implementation 'org.projectlombok:lombok:1.18.28'
     annotationProcessor "org.projectlombok:lombok:1.18.28"
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 publishing {
