@@ -2,7 +2,7 @@
 FROM gradle:7.3.3-jdk17 AS build
 
 # Copia el código fuente en el contenedor
-COPY --chown=gradle:gradle . /home/gradle/src
+COPY --chown=gradle:gradle workout-core /home/gradle/src
 
 # Cambia al directorio de trabajo donde está el código fuente
 WORKDIR /home/gradle/src
