@@ -29,7 +29,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t your-docker-user/your-repo:latest \
+          docker build -t pcanohuoc/alertmanagmentservice:latest \
             --build-arg JAR_FILE=workout-core/build/libs/*.jar \
             .
 
